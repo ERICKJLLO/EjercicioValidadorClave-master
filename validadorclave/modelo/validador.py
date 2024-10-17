@@ -1,5 +1,10 @@
+import re
 from abc import ABC, abstractmethod
-from errores import ValidadorError, NoCumpleLongitudMinimaError, NoTieneCaracterEspecialError, NoTieneLetraMayusculaError, NoTieneLetraMinusculaError, NoTieneNumeroError, NoTienePalabraSecretaError
+from .errores import (
+    NoTieneLetraMayusculaError, NoTieneLetraMinusculaError, NoTieneNumeroError,
+    NoTieneCaracterEspecialError, NoCumpleLongitudMinimaError, NoTienePalabraSecretaError
+)
+
 
 class ReglaValidacion(ABC):
     def __init__(self, longitud_minima=8):
@@ -20,7 +25,7 @@ class ReglaValidacion(ABC):
 
     def _validar_longitud(self, clave):
         return len(clave) >= self.longitud_minima
-    
+
 class ReglaValidacionGanimedes(ReglaValidacion):
     def __init__(self):
         super().__init__(longitud_minima=8)
@@ -41,12 +46,12 @@ class ReglaValidacionGanimedes(ReglaValidacion):
             raise NoTieneCaracterEspecialError
         return True
 
+
 class ReglaValidacionCalisto(ReglaValidacion):
     def __init__(self):
         super().__init__(longitud_minima=8)
 
     def contiene_calisto(self, clave):
-        # Verifica si la palabra "calisto" (en cualquier combinación de mayúsculas/minúsculas) está en la clave
         return "calisto" in clave.lower()
 
     def es_valida(self, clave):

@@ -1,26 +1,17 @@
-class ValidadorError(Exception):
+class NoTieneLetraMayusculaError(Exception):
     pass
 
-
-class NoCumpleLongitudMinimaError(ValidadorError):
+class NoTieneLetraMinusculaError(Exception):
     pass
 
-
-class NoTieneLetraMayusculaError(ValidadorError):
+class NoTieneNumeroError(Exception):
     pass
 
-
-class NoTieneLetraMinusculaError(ValidadorError):
+class NoTieneCaracterEspecialError(Exception):
     pass
 
-
-class NoTieneNumeroError(ValidadorError):
+class NoCumpleLongitudMinimaError(Exception):
     pass
 
-
-class NoTieneCaracterEspecialError(ValidadorError):
-    pass
-
-
-class NoTienePalabraSecretaError(ValidadorError):
+class NoTienePalabraSecretaError(Exception):
     pass
