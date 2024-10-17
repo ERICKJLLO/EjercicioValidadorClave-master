@@ -39,5 +39,32 @@ class ReglaValidacionGanimedes(ReglaValidacion):
             raise NoTieneNumeroError
         if not self.contiene_caracter_especial(clave):
             raise NoTieneCaracterEspecialError
-
         return True
+
+class ReglaValidacionCalisto(ReglaValidacion):
+    def __init__(self):
+        super().__init__(longitud_minima=8)
+
+    def contiene_calisto(self, clave):
+        # Verifica si la palabra "calisto" (en cualquier combinación de mayúsculas/minúsculas) está en la clave
+        return "calisto" in clave.lower()
+
+    def es_valida(self, clave):
+        if not self._validar_longitud(clave):
+            raise NoCumpleLongitudMinimaError
+        if not self._contiene_mayuscula(clave):
+            raise NoTieneLetraMayusculaError
+        if not self._contiene_minuscula(clave):
+            raise NoTieneLetraMinusculaError
+        if not self._contiene_numero(clave):
+            raise NoTieneNumeroError
+        if not self.contiene_calisto(clave):
+            raise NoTienePalabraSecretaError
+        return True
+
+class Validador:
+    def __init__(self, regla: ReglaValidacion):
+        self.regla = regla
+
+    def es_valida(self, clave):
+        return self.regla.es_valida(clave)
